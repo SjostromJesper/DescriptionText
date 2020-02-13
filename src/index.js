@@ -11,7 +11,7 @@ import F36Tokens from '@contentful/forma-36-tokens';
 const App = (props) => {
     const [role, setRole] = useState('');
     const [value, setValue] = useState(props.sdk.field.getValue() || '');
-    const [edit, setEdit] = useState(true);
+    const [edit, setEdit] = useState(false);
 
     const changeRoleValue = (role) => {
         setRole(role);
@@ -91,11 +91,11 @@ const App = (props) => {
                 {(edit && role === "Editor") ? (<Textarea
                         rows={8}
                         labelText={""}
-                        id={"id"}
-                        testId={"my-field"}
-                        name={"herro"}
+                        id={"editArea"}
+                        testId={"editArea-test"}
+                        name={"editArea"}
                         value={value}
-                        isFullWidth={true}
+                        maxLength={200000}
                         onChange={onChange}/>)
                     : (<div style={descriptionBoxStyle}><CurrentDescription
                         text={value}/></div>)}
