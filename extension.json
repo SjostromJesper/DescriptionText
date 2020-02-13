@@ -1,0 +1,8 @@
+{
+  "id": "DescriptionText",
+  "name": "DescriptionText",
+  "srcdoc": "./build/index.html",
+  "fieldTypes": [
+    "Symbol"
+  ]
+}
