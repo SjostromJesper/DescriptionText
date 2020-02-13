@@ -1,12 +1,10 @@
 import React, {useEffect, useState} from 'react';
 import ReactDOM from 'react-dom';
 import {Button, Textarea} from '@contentful/forma-36-react-components';
-import {init, locations} from 'contentful-ui-extensions-sdk';
+import {init} from 'contentful-ui-extensions-sdk';
 import '@contentful/forma-36-react-components/dist/styles.css';
 import './index.css';
-import PropTypes from "prop-types";
 import Markdown from 'markdown-to-jsx';
-import F36Tokens from '@contentful/forma-36-tokens';
 
 const App = (props) => {
     const [role, setRole] = useState('');
@@ -19,7 +17,6 @@ const App = (props) => {
 
     const checkUserRole = () => {
         props.sdk.user.spaceMembership.roles.forEach((role) => {
-            console.log(role.name);
             if (role.name === "Editor") {
                 changeRoleValue(role.name);
             }
@@ -95,7 +92,6 @@ const App = (props) => {
                         testId={"editArea-test"}
                         name={"editArea"}
                         value={value}
-                        maxLength={200000}
                         onChange={onChange}/>)
                     : (<div style={descriptionBoxStyle}><CurrentDescription
                         text={value}/></div>)}
