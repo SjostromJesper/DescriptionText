@@ -1,31 +1,43 @@
 import React, {useEffect, useState} from 'react';
 import ReactDOM from 'react-dom';
-import {Button, Textarea} from '@contentful/forma-36-react-components';
+import {Button, Textarea, Note} from '@contentful/forma-36-react-components';
 import {init} from 'contentful-ui-extensions-sdk';
 import '@contentful/forma-36-react-components/dist/styles.css';
 import './index.css';
 import Markdown from 'markdown-to-jsx';
 
 const App = (props) => {
-    const [role, setRole] = useState('');
+    const [boxColor, setBoxColor] = useState("primary");
+    const [editorRoles, setEditorRole] = useState(props.sdk.parameters.instance.editRights);
+    const [role, setRole] = useState("user");
     const [value, setValue] = useState(props.sdk.field.getValue() || '');
-    const [edit, setEdit] = useState(false);
+    const [edit, setEdit] = useState(false)
+    const [isEditor, setIsEditor] = useState(false);
 
-    const changeRoleValue = (role) => {
-        setRole(role);
+    const changeRoleValue = (value) => {
+        const er = editorRoles.toLowerCase();
+        if(er.includes(value)) {
+            setIsEditor(true);
+        }
     };
 
     const checkUserRole = () => {
         props.sdk.user.spaceMembership.roles.forEach((role) => {
-            if (role.name === "Editor") {
-                changeRoleValue(role.name);
-            }
+            const roleName = role.name.toLowerCase();
+            changeRoleValue(roleName);
         });
     };
 
     useEffect(() => {
         props.sdk.window.startAutoResizer();
+        setBoxColor(props.sdk.parameters.instance.boxColor);
+
+        const res = editorRoles.split(",").map(ed => ed.toLowerCase().trim());
+        setEditorRole(res);
         checkUserRole();
+        
+        //changeEditRoleValue(props.sdk.parameters.instance.editRights);
+        //checkUserRole();
 
         // Handler for external field value changes (e.g. when multiple authors are working on the same entry).
         const detachExternalChangeHandler = props.sdk.field.onValueChanged(onExternalChange);
@@ -55,8 +67,10 @@ const App = (props) => {
         setEdit(edit ? !edit : true);
     };
 
+
     const CurrentDescription = () => {
         return (
+            <Note noteType={boxColor}>
             <Markdown
                 children={value}
                 options={{
@@ -69,6 +83,7 @@ const App = (props) => {
                     },
                 }}
             />
+            </Note>
         )
     };
 
@@ -84,8 +99,9 @@ const App = (props) => {
     return (
         <>
             <div>
-                {role === "Editor" ? (<Button style={buttonStyle} onClick={onEditChange}>Edit</Button>) : null}
-                {(edit && role === "Editor") ? (<Textarea
+                {isEditor ? (
+                            <Button style={buttonStyle} onClick={onEditChange}>Edit</Button>) : null}
+                {(edit && isEditor) ? (<Textarea
                         rows={8}
                         labelText={""}
                         id={"editArea"}
