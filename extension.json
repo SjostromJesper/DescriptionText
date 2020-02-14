@@ -26,7 +26,7 @@
           { "primary": "Blue"},
           { "positive":  "Green"}
         ],
-        "labels": { "empty": "choose box color" },
+        "labels": { "empty": "Default (Blue)" },
         "required": false
       }
     ]

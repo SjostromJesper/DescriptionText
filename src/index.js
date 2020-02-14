@@ -9,9 +9,8 @@ import Markdown from 'markdown-to-jsx';
 const App = (props) => {
     const [boxColor, setBoxColor] = useState("primary");
     const [editorRoles, setEditorRole] = useState(props.sdk.parameters.instance.editRights);
-    const [role, setRole] = useState("user");
     const [value, setValue] = useState(props.sdk.field.getValue() || '');
-    const [edit, setEdit] = useState(false)
+    const [edit, setEdit] = useState(false);
     const [isEditor, setIsEditor] = useState(false);
 
     const changeRoleValue = (value) => {
@@ -35,50 +34,42 @@ const App = (props) => {
         const res = editorRoles.split(",").map(ed => ed.toLowerCase().trim());
         setEditorRole(res);
         checkUserRole();
-        
+
         //changeEditRoleValue(props.sdk.parameters.instance.editRights);
         //checkUserRole();
 
         // Handler for external field value changes (e.g. when multiple authors are working on the same entry).
-        const detachExternalChangeHandler = props.sdk.field.onValueChanged(onExternalChange);
+        const detachExternalChangeHandler = props.sdk.field.onValueChanged(() => {});
 
-        return () => {
-            if (detachExternalChangeHandler) {
-                detachExternalChangeHandler();
-            }
-        }
+         return () => {
+             if (detachExternalChangeHandler) {
+                 detachExternalChangeHandler();
+             }
+         }
     }, []);
-
-    const onExternalChange = value => {
-        setValue(value);
-    };
 
     const onChange = e => {
         const value = e.currentTarget.value;
         setValue(value);
-        if (value) {
-            props.sdk.field.setValue(value);
-        } else {
-            props.sdk.field.removeValue();
-        }
+
+        value ? props.sdk.field.setValue(value) : props.sdk.field.removeValue();
     };
 
     const onEditChange = () => {
         setEdit(edit ? !edit : true);
     };
 
-
     const CurrentDescription = () => {
         return (
-            <Note noteType={boxColor}>
+            <Note noteType={boxColor} className={"myNote"}>
             <Markdown
                 children={value}
                 options={{
                     createElement(type, props, children) {
                         return (
-                            <div className="parent">
+                            <span className="parent">
                                 {React.createElement(type, props, children)}
-                            </div>
+                            </span>
                         );
                     },
                 }}
@@ -87,20 +78,11 @@ const App = (props) => {
         )
     };
 
-    const descriptionBoxStyle = {
-        fontFamily: "-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol",
-        //border: '1px solid rgba(0, 0, 0, 0.08)'
-    };
-
-    const buttonStyle = {
-        marginBottom: '2px'
-    };
-
     return (
         <>
             <div>
                 {isEditor ? (
-                            <Button style={buttonStyle} onClick={onEditChange}>Edit</Button>) : null}
+                            <Button className={"editButton"} onClick={onEditChange}>Edit</Button>) : null}
                 {(edit && isEditor) ? (<Textarea
                         rows={8}
                         labelText={""}
@@ -109,7 +91,7 @@ const App = (props) => {
                         name={"editArea"}
                         value={value}
                         onChange={onChange}/>)
-                    : (<div style={descriptionBoxStyle}><CurrentDescription
+                    : (<div className={"descriptionBox"}><CurrentDescription
                         text={value}/></div>)}
             </div>
         </>

@@ -8,6 +8,16 @@ div {
   font: inherit;
   vertical-align: baseline;
 }
-.Note__Note__icon___20RqC {
+
+/*Remove note from description block*/
+.myNote > :first-child {
   display: none;
+}
+
+.editButton {
+  margin-bottom: 2px;
+}
+
+.descriptionBox {
+  font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol;
 }
