@@ -9,8 +9,12 @@ div {
   vertical-align: baseline;
 }
 
-/*Remove note from description block*/
-.myNote > :first-child {
+.myNote {
+  font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol;
+}
+
+/* Remove icon from Note component */
+.myNote > div:first-child {
   display: none;
 }
 
@@ -18,6 +22,3 @@ div {
   margin-bottom: 2px;
 }
 
-.descriptionBox {
-  font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol;
-}

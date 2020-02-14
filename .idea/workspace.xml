@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="fee468ed-b57a-4166-a51e-022dde33dfb7" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/extension.json" beforeDir="false" afterPath="$PROJECT_DIR$/extension.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.js" afterDir="false" />
     </list>
@@ -46,7 +45,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1581494694272</updated>
-      <workItem from="1581494696295" duration="57956000" />
+      <workItem from="1581494696295" duration="61034000" />
     </task>
     <servers />
   </component>
@@ -62,5 +61,9 @@
       <screen x="0" y="0" width="1280" height="689" />
     </state>
     <state x="449" y="258" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1280.689@0.0.1280.689" timestamp="1581602844597" />
+    <state x="297" y="153" key="run.anything.popup" timestamp="1581672275816">
+      <screen x="0" y="0" width="1280" height="689" />
+    </state>
+    <state x="297" y="153" key="run.anything.popup/0.0.1280.689@0.0.1280.689" timestamp="1581672275816" />
   </component>
 </project>
